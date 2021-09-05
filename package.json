@@ -1,0 +1,41 @@
+{
+  "name": "@indiebackend/client-sdk",
+  "version": "0.1.0",
+  "description": "Indiebackend's client SDK",
+  "main": "dist/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "component-emitter": "^1.3.0",
+    "base64-arraybuffer": "^0.1.4",
+    "debug": "^4.3.2",
+    "backo2": "^1.0.2",
+    "engine.io-client": "^5.2.0",
+    "engine.io-parser": "^4.0.3",
+    "ms": "^2.1.2",
+    "socket.io-client": "^4.2.0",
+    "socket.io-parser": "^4.0.4",
+    "parseqs": "^0.0.6",
+    "has-cors": "^1.1.0",
+    "parseuri": "^0.0.6",
+    "xmlhttprequest-ssl": "^2.0.0",
+    "yeast": "^0.1.2",
+    "ws": "^7.4.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "prepare": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Indiebackend/ClientSDK-Typescript.git"
+  },
+  "author": "Julien Lavocat",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Indiebackend/ClientSDK-Typescript/issues"
+  },
+  "homepage": "https://github.com/Indiebackend/ClientSDK-Typescript#readme"
+}
