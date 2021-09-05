@@ -16,11 +16,10 @@ export class Indiebackend {
 	stats: StatsApi;
 	shops: ShopsApi;
 	leaderboards: LeaderboardsApi;
-	messaging: MessagingApi;
 
-	constructor(appSecret: string, appId: string) {
+	constructor(private appId: string) {
 		const cfg = new Configuration({
-			apiKey: appSecret,
+			apiKey: appId,
 			basePath:
 				process.env.IDB_API_HOST ||
 				"http://clients.api.dev.indiebackend.com",
@@ -32,6 +31,9 @@ export class Indiebackend {
 		this.stats = new StatsApi(cfg);
 		this.shops = new ShopsApi(cfg);
 		this.leaderboards = new LeaderboardsApi(cfg);
-		this.messaging = new MessagingApi(appSecret, appId);
+	}
+
+	createMessagingClient(profileToken: string) {
+		return new MessagingApi(this.appId, profileToken);
 	}
 }

@@ -5,7 +5,7 @@ export class MessagingApi {
 	client!: Socket;
 	channels: Record<string, MessagingChannel>;
 
-	constructor(private appSecret: string, private appId: string) {
+	constructor(private appId: string, private token: string) {
 		this.channels = {};
 	}
 
@@ -16,7 +16,7 @@ export class MessagingApi {
 				"ws://messaging.api.dev.indiebackend.com",
 			{
 				extraHeaders: {
-					AppSecret: this.appSecret,
+					token: this.token,
 				},
 			}
 		).connect();
