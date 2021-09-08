@@ -266,4 +266,4 @@ _.msm
 
 # End of https://www.toptal.com/developers/gitignore/api/node,windows,macos,linux,yarn
 
-test/test.ts
+test
