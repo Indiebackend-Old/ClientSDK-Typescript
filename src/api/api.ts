@@ -2629,14 +2629,11 @@ export const PlayersApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Login a player to an application using an email and password
          * @summary Login player via email and password
-         * @param {string} appId Application Id to use
          * @param {LoginPlayerDto} loginPlayerDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        loginPlayerEmail: async (appId: string, loginPlayerDto: LoginPlayerDto, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'appId' is not null or undefined
-            assertParamExists('loginPlayerEmail', 'appId', appId)
+        loginPlayerEmail: async (loginPlayerDto: LoginPlayerDto, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'loginPlayerDto' is not null or undefined
             assertParamExists('loginPlayerEmail', 'loginPlayerDto', loginPlayerDto)
             const localVarPath = `/players/login/email`;
@@ -2651,9 +2648,8 @@ export const PlayersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (appId !== undefined && appId !== null) {
-                localVarHeaderParameter['AppId'] = String(appId);
-            }
+            // authentication AppId required
+            await setApiKeyToObject(localVarHeaderParameter, "AppId", configuration)
 
 
     
@@ -2673,15 +2669,12 @@ export const PlayersApiAxiosParamCreator = function (configuration?: Configurati
          * Redirect a client to the OAuth2 dialog of a supported OAuth2 provider
          * @summary OAuth2 redirection to a supported provider
          * @param {string} provider 
-         * @param {string} appId Application Id to use
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        redirectOauth: async (provider: string, appId: string, options: any = {}): Promise<RequestArgs> => {
+        redirectOauth: async (provider: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'provider' is not null or undefined
             assertParamExists('redirectOauth', 'provider', provider)
-            // verify required parameter 'appId' is not null or undefined
-            assertParamExists('redirectOauth', 'appId', appId)
             const localVarPath = `/players/redirect/{provider}`
                 .replace(`{${"provider"}}`, encodeURIComponent(String(provider)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2695,9 +2688,8 @@ export const PlayersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (appId !== undefined && appId !== null) {
-                localVarHeaderParameter['AppId'] = String(appId);
-            }
+            // authentication AppId required
+            await setApiKeyToObject(localVarHeaderParameter, "AppId", configuration)
 
 
     
@@ -2713,14 +2705,11 @@ export const PlayersApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Register a new account for an application using an email and password
          * @summary Register player via email and password
-         * @param {string} appId Application Id to use
          * @param {RegisterPlayerDto} registerPlayerDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        registerPlayerEmail: async (appId: string, registerPlayerDto: RegisterPlayerDto, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'appId' is not null or undefined
-            assertParamExists('registerPlayerEmail', 'appId', appId)
+        registerPlayerEmail: async (registerPlayerDto: RegisterPlayerDto, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'registerPlayerDto' is not null or undefined
             assertParamExists('registerPlayerEmail', 'registerPlayerDto', registerPlayerDto)
             const localVarPath = `/players/register/email`;
@@ -2735,9 +2724,8 @@ export const PlayersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (appId !== undefined && appId !== null) {
-                localVarHeaderParameter['AppId'] = String(appId);
-            }
+            // authentication AppId required
+            await setApiKeyToObject(localVarHeaderParameter, "AppId", configuration)
 
 
     
@@ -2776,37 +2764,34 @@ export const PlayersApiFp = function(configuration?: Configuration) {
         /**
          * Login a player to an application using an email and password
          * @summary Login player via email and password
-         * @param {string} appId Application Id to use
          * @param {LoginPlayerDto} loginPlayerDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async loginPlayerEmail(appId: string, loginPlayerDto: LoginPlayerDto, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlayerLogin>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.loginPlayerEmail(appId, loginPlayerDto, options);
+        async loginPlayerEmail(loginPlayerDto: LoginPlayerDto, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlayerLogin>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.loginPlayerEmail(loginPlayerDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Redirect a client to the OAuth2 dialog of a supported OAuth2 provider
          * @summary OAuth2 redirection to a supported provider
          * @param {string} provider 
-         * @param {string} appId Application Id to use
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async redirectOauth(provider: string, appId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.redirectOauth(provider, appId, options);
+        async redirectOauth(provider: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.redirectOauth(provider, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Register a new account for an application using an email and password
          * @summary Register player via email and password
-         * @param {string} appId Application Id to use
          * @param {RegisterPlayerDto} registerPlayerDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async registerPlayerEmail(appId: string, registerPlayerDto: RegisterPlayerDto, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlayerRegisterResult>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.registerPlayerEmail(appId, registerPlayerDto, options);
+        async registerPlayerEmail(registerPlayerDto: RegisterPlayerDto, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlayerRegisterResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.registerPlayerEmail(registerPlayerDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -2831,35 +2816,32 @@ export const PlayersApiFactory = function (configuration?: Configuration, basePa
         /**
          * Login a player to an application using an email and password
          * @summary Login player via email and password
-         * @param {string} appId Application Id to use
          * @param {LoginPlayerDto} loginPlayerDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        loginPlayerEmail(appId: string, loginPlayerDto: LoginPlayerDto, options?: any): AxiosPromise<PlayerLogin> {
-            return localVarFp.loginPlayerEmail(appId, loginPlayerDto, options).then((request) => request(axios, basePath));
+        loginPlayerEmail(loginPlayerDto: LoginPlayerDto, options?: any): AxiosPromise<PlayerLogin> {
+            return localVarFp.loginPlayerEmail(loginPlayerDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Redirect a client to the OAuth2 dialog of a supported OAuth2 provider
          * @summary OAuth2 redirection to a supported provider
          * @param {string} provider 
-         * @param {string} appId Application Id to use
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        redirectOauth(provider: string, appId: string, options?: any): AxiosPromise<void> {
-            return localVarFp.redirectOauth(provider, appId, options).then((request) => request(axios, basePath));
+        redirectOauth(provider: string, options?: any): AxiosPromise<void> {
+            return localVarFp.redirectOauth(provider, options).then((request) => request(axios, basePath));
         },
         /**
          * Register a new account for an application using an email and password
          * @summary Register player via email and password
-         * @param {string} appId Application Id to use
          * @param {RegisterPlayerDto} registerPlayerDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        registerPlayerEmail(appId: string, registerPlayerDto: RegisterPlayerDto, options?: any): AxiosPromise<PlayerRegisterResult> {
-            return localVarFp.registerPlayerEmail(appId, registerPlayerDto, options).then((request) => request(axios, basePath));
+        registerPlayerEmail(registerPlayerDto: RegisterPlayerDto, options?: any): AxiosPromise<PlayerRegisterResult> {
+            return localVarFp.registerPlayerEmail(registerPlayerDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -2885,40 +2867,37 @@ export class PlayersApi extends BaseAPI {
     /**
      * Login a player to an application using an email and password
      * @summary Login player via email and password
-     * @param {string} appId Application Id to use
      * @param {LoginPlayerDto} loginPlayerDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PlayersApi
      */
-    public loginPlayerEmail(appId: string, loginPlayerDto: LoginPlayerDto, options?: any) {
-        return PlayersApiFp(this.configuration).loginPlayerEmail(appId, loginPlayerDto, options).then((request) => request(this.axios, this.basePath));
+    public loginPlayerEmail(loginPlayerDto: LoginPlayerDto, options?: any) {
+        return PlayersApiFp(this.configuration).loginPlayerEmail(loginPlayerDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Redirect a client to the OAuth2 dialog of a supported OAuth2 provider
      * @summary OAuth2 redirection to a supported provider
      * @param {string} provider 
-     * @param {string} appId Application Id to use
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PlayersApi
      */
-    public redirectOauth(provider: string, appId: string, options?: any) {
-        return PlayersApiFp(this.configuration).redirectOauth(provider, appId, options).then((request) => request(this.axios, this.basePath));
+    public redirectOauth(provider: string, options?: any) {
+        return PlayersApiFp(this.configuration).redirectOauth(provider, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Register a new account for an application using an email and password
      * @summary Register player via email and password
-     * @param {string} appId Application Id to use
      * @param {RegisterPlayerDto} registerPlayerDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PlayersApi
      */
-    public registerPlayerEmail(appId: string, registerPlayerDto: RegisterPlayerDto, options?: any) {
-        return PlayersApiFp(this.configuration).registerPlayerEmail(appId, registerPlayerDto, options).then((request) => request(this.axios, this.basePath));
+    public registerPlayerEmail(registerPlayerDto: RegisterPlayerDto, options?: any) {
+        return PlayersApiFp(this.configuration).registerPlayerEmail(registerPlayerDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -3367,17 +3346,14 @@ export const ShopsApiAxiosParamCreator = function (configuration?: Configuration
          * @summary Get shop
          * @param {string} shopId 
          * @param {boolean} withCategories 
-         * @param {string} appId Application Id to use
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getShop: async (shopId: string, withCategories: boolean, appId: string, options: any = {}): Promise<RequestArgs> => {
+        getShop: async (shopId: string, withCategories: boolean, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'shopId' is not null or undefined
             assertParamExists('getShop', 'shopId', shopId)
             // verify required parameter 'withCategories' is not null or undefined
             assertParamExists('getShop', 'withCategories', withCategories)
-            // verify required parameter 'appId' is not null or undefined
-            assertParamExists('getShop', 'appId', appId)
             const localVarPath = `/shops/{shopId}`
                 .replace(`{${"shopId"}}`, encodeURIComponent(String(shopId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -3391,16 +3367,15 @@ export const ShopsApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication AppId required
+            await setApiKeyToObject(localVarHeaderParameter, "AppId", configuration)
+
             // authentication profile-token required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             if (withCategories !== undefined) {
                 localVarQueryParameter['withCategories'] = withCategories;
-            }
-
-            if (appId !== undefined && appId !== null) {
-                localVarHeaderParameter['AppId'] = String(appId);
             }
 
 
@@ -3481,12 +3456,11 @@ export const ShopsApiFp = function(configuration?: Configuration) {
          * @summary Get shop
          * @param {string} shopId 
          * @param {boolean} withCategories 
-         * @param {string} appId Application Id to use
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getShop(shopId: string, withCategories: boolean, appId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Shop>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getShop(shopId, withCategories, appId, options);
+        async getShop(shopId: string, withCategories: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Shop>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getShop(shopId, withCategories, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -3526,12 +3500,11 @@ export const ShopsApiFactory = function (configuration?: Configuration, basePath
          * @summary Get shop
          * @param {string} shopId 
          * @param {boolean} withCategories 
-         * @param {string} appId Application Id to use
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getShop(shopId: string, withCategories: boolean, appId: string, options?: any): AxiosPromise<Shop> {
-            return localVarFp.getShop(shopId, withCategories, appId, options).then((request) => request(axios, basePath));
+        getShop(shopId: string, withCategories: boolean, options?: any): AxiosPromise<Shop> {
+            return localVarFp.getShop(shopId, withCategories, options).then((request) => request(axios, basePath));
         },
         /**
          * Make a purchase in one or more shops
@@ -3571,13 +3544,12 @@ export class ShopsApi extends BaseAPI {
      * @summary Get shop
      * @param {string} shopId 
      * @param {boolean} withCategories 
-     * @param {string} appId Application Id to use
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ShopsApi
      */
-    public getShop(shopId: string, withCategories: boolean, appId: string, options?: any) {
-        return ShopsApiFp(this.configuration).getShop(shopId, withCategories, appId, options).then((request) => request(this.axios, this.basePath));
+    public getShop(shopId: string, withCategories: boolean, options?: any) {
+        return ShopsApiFp(this.configuration).getShop(shopId, withCategories, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

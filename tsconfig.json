@@ -9,6 +9,7 @@
 		/* Strict Type-Checking Options */
 		"strict": true,
 		"esModuleInterop": true,
+		"strictPropertyInitialization": false,
 
 		/* Advanced Options */
 		"skipLibCheck": true,
